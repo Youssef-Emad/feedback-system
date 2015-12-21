@@ -1,3 +1,4 @@
 Rails.application.routes.draw do
-  get "/login" , to: "persons#login"
+  get "/home" , to: "persons#home"
+  post "/login", to: "persons#login"
 end
