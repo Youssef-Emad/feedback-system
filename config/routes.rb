@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   get "students/:id/feedback/:course_id" , to: "students#feedback"
   get "staff/:id/feedback/:course_id" , to: "staff#feedback"
   post "/feedbackinsert", to: "students#feedback_insert"
+  get "staff/:id/statistics" , to: "staff#statistics"
 end
