@@ -1,6 +1,6 @@
 class CreateEvaluate < ActiveRecord::Migration
   def change
-    execute"CREATE TABLE EVALUATE (
+    execute"CREATE TABLE EVALUATESTAFF (
   student_id INT NOT NULL ,
   staff_id INT NOT NULL ,
   course_code INT NOT NULL,
