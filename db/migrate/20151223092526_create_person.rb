@@ -9,7 +9,6 @@ class CreatePerson < ActiveRecord::Migration
   email VARCHAR(45) NOT NULL UNIQUE ,
   password VARCHAR(45) NOT NULL,
   token INT,
-  is_staff BOOLEAN NOT NULL,
   PRIMARY KEY (person_id) );"
   end
 end

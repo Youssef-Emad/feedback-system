@@ -28,6 +28,7 @@ class CreateEvaluate < ActiveRecord::Migration
   ON DELETE CASCADE
   ON UPDATE CASCADE
 
-  );"
+  );
+"
   end
 end
