@@ -13,6 +13,10 @@
 	WHERE SIC.student_id = #{params["id"]}))AND DEPARTMENT.department_id = COURSE.department_id ;"
  		render "home",locals: {list: result.first}
  	end
+
+ 	def feedback
+ 		
+ 	end
 end
 
 def check_student_authorization
