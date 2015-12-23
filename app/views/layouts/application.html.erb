@@ -3,9 +3,6 @@
 
     <head>
 
-    	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  		<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  		<%= csrf_meta_tags %>
 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,17 +11,17 @@
 
         <!-- CSS -->
         <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
-        <link rel="stylesheet" type="text/css" href="assets/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="assets/font-awesome/css/font-awesome.min.css">
-		    <link rel="stylesheet" type="text/css" href="assets/css/form-elements.css">
-        <link rel="stylesheet" type="text/css" href="assets/style.css">
+        <link rel="stylesheet" type="text/css" href="/assets/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="/assets/font-awesome/css/font-awesome.min.css">
+		    <link rel="stylesheet" type="text/css" href="/assets/css/form-elements.css">
+        <link rel="stylesheet" type="text/css" href="/assets/style.css">
 
         <!-- Favicon and touch icons -->
-        <link rel="shortcut icon" href="assets/favicon.png">
-        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/apple-touch-icon-144-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/apple-touch-icon-114-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/apple-touch-icon-72-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" href="assets/apple-touch-icon-57-precomposed.png">
+        <link rel="shortcut icon" href="/assets/favicon.png">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="/assets/apple-touch-icon-57-precomposed.png">
 
     </head>
 
@@ -48,21 +45,24 @@
     </div>
   </div>
 </nav>
+<div id="container">
+<div id="content">
 
 <%= yield %>
-
+</div>
+</div>
 <div id="footer">
       <div class="container">
         <p class"rad-text"> Developed by Group of CSE 4th Year Students </p>
-		<p class"rad-text"> All Rights Reserved to Faculty of Engineering - Ain Shams University 2015 </p>
+		    <p class"rad-text"> All Rights Reserved to Faculty of Engineering - Ain Shams University 2015 </p>
       </div>
 </div>
 
         <!-- Javascript -->
-        <script src="assets/js/jquery-1.11.1.min.js"></script>
-        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-        <script src="assets/js/jquery.backstretch.min.js"></script>
-        <script src="assets/js/scripts.js"></script>
+        <script src="/assets/js/jquery-1.11.1.min.js"></script>
+        <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/assets/js/jquery.backstretch.min.js"></script>
+        <script src="/assets/js/scripts.js"></script>
         
         <!--[if lt IE 10]>
             <script src="assets/js/placeholder.js"></script>
