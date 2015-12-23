@@ -15,8 +15,8 @@
 						<tbody>
 							<% if list != nil%>
 								<%list.each do |i|%>
-								<tr>
-									<th class="table-header"><%= list.shift%></th>
+								<tr class="clickable-row" style="cursor: pointer" data-href="http://www.filgoal.com">
+									<th class="table-header"><%=list.shift%></th>
 									<th class="table-header"><%=list.shift%></th>
 									<th class="table-header"><%=list.shift%></th>
 								</tr>
