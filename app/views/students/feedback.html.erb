@@ -3,352 +3,251 @@
 		<div class="container">
 			<ul class="nav nav-tabs">
 				<li class="active tab-hov"><a data-toggle="tab" class="tab-text" href="#part1">Part 1</a></li>
-				<li class="tab-hov"><a data-toggle="tab" class="tab-text" href="#part2">Part 2</a></li>
-				<li class="tab-hov"><a data-toggle="tab" class="tab-text" href="#part3">Part 3</a></li>
+				<%count.times do |i|%>
+					<li class="tab-hov"><a data-toggle="tab" class="tab-text" href=<%="#part"+"#{i+2}"%>><%="Part "+"#{i+2}"%></a></li>
+				<%end%>
 			</ul>
-			<form role="form">
+			<form role="form" action ="/feedbackinsert" method="post">
 				<div class="tab-content">
 					<div id="part1" class="tab-pane fade in active">
-						<h3 class="rad-text">Dr.Mona</h3>
-						<div class="form-group rad-text">
-						<p class="ques-form">1. How far is the lecturer committed to the course?</p>
-							<label class="radio-inline">
-								<input type="radio" name="optradio1" required>Very Poor
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio1" required>Poor
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio1" required>Fair
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio1" required>Good
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio1" required>Very Good
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio1" required>Excellent
-							</label>
-						</div>
-						<div class="form-group rad-text">
-						<p class="ques-form">2. How far is the lecturer way of delivery satisfy you?</p>
-							<label class="radio-inline">
-								<input type="radio" name="optradio2" required>Very Poor
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio2" required>Poor
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio2" required>Fair
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio2" required>Good
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio2" required>Very Good
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio2" required>Excellent
-							</label>
-						</div>
-						<div class="form-group rad-text">
-						<p class="ques-form">3. How far does the lecturer exam's satisfy an engineering mindset?</p>
-							<label class="radio-inline">
-								<input type="radio" name="optradio3" required>Very Poor
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio3" required>Poor
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio3" required>Fair
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio3" required>Good
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio3" required>Very Good
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio3" required>Excellent
-							</label>
-						</div>
-						<div class="form-group rad-text">
-						<p class="ques-form">4. How far does the lecturer motivate you to learn?</p>
-							<label class="radio-inline">
-								<input type="radio" name="optradio4" required>Very Poor
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio4" required>Poor
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio4" required>Fair
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio4" required>Good
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio4" required>Very Good
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio4" required>Excellent
-							</label>
-						</div>
-						<div class="form-group rad-text">
-						<p class="ques-form">5. How far is the lecturer understanding to the course's concepts?</p>
-							<label class="radio-inline">
-								<input type="radio" name="optradio5" required>Very Poor
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio5" required>Poor
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio5" required>Fair
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio5" required>Good
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio5" required>Very Good
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio5" required>Excellent
-							</label>
-						</div>
-						<div class="form-group col-sm-8 col-sm-offset-2">
-						  <label class="rad-text" for="comment">Comments:</label>
-						  <textarea class="form-control field" rows="10" cols="10" placeholder="Write your comments here..." id="comment1"></textarea>
-						</div>
-					</div>
-
-					<div id="part2" class="tab-pane fade">
-						<h3 class="rad-text">Eng.Veronia</h3>
-						<div class="form-group rad-text">
-						<p class="ques-form">1. How far is the TA committed to the course?</p>
-							<label class="radio-inline">
-								<input type="radio" name="optradio6" required>Very Poor
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio6" required>Poor
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio6" required>Fair
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio6" required>Good
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio6" required>Very Good
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio6" required>Excellent
-							</label>
-						</div>
-						<div class="form-group rad-text">
-						<p class="ques-form">2. How far is the TA's understanding to the course's concepts?</p>
-							<label class="radio-inline">
-								<input type="radio" name="optradio7" required>Very Poor
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio7" required>Poor
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio7" required>Fair
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio7" required>Good
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio7" required>Very Good
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio7" required>Excellent
-							</label>
-						</div>
-						<div class="form-group rad-text">
-						<p class="ques-form">3. How far is the TA's way of delivery satisfy you?</p>
-							<label class="radio-inline">
-								<input type="radio" name="optradio8" required>Very Poor
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio8" required>Poor
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio8" required>Fair
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio8" required>Good
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio8" required>Very Good
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio8" required>Excellent
-							</label>
-						</div>
-						<div class="form-group rad-text">
-						<p class="ques-form">4. How far does the TA provide you with the necessary support to excel in the course?</p>
-							<label class="radio-inline">
-								<input type="radio" name="optradio9" required>Very Poor
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio9" required>Poor
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio9" required>Fair
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio9" required>Good
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio9" required>Very Good
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio9" required>Excellent
-							</label>
-						</div>
-						<div class="form-group rad-text">
-						<p class="ques-form">5. How clear is the TA's communication channel with you?</p>
-							<label class="radio-inline">
-								<input type="radio" name="optradio10" required>Very Poor
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio10" required>Poor
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio10" required>Fair
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio10" required>Good
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio10" required>Very Good
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="optradio10" required>Excellent
-							</label>
-						</div>
-						<div class="form-group col-sm-8 col-sm-offset-2">
-						  <label class="rad-text" for="comment">Comments:</label>
-						  <textarea class="form-control field" rows="10" cols="10" placeholder="Write your comments here..." id="comment2"></textarea>
-						</div>
-					</div>
-
-					<div id="part3" class="tab-pane fade">
 						<h3 class="rad-text">Database</h3>
 						<div class="form-group rad-text">
 						<p class="ques-form">1. How far is the course content related to your major?</p>
 							<label class="radio-inline">
-								<input type="radio" name="optradio11" required>Very Poor
+								<input type="radio" name="choice1" value = "0" required>Very Poor
 							</label>
 							<label class="radio-inline">
-								<input type="radio" name="optradio11" required>Poor
+								<input type="radio" name="choice1" value = "1" required>Poor
 							</label>
 							<label class="radio-inline">
-								<input type="radio" name="optradio11" required>Fair
+								<input type="radio" name="choice1" value = "2" required>Fair
 							</label>
 							<label class="radio-inline">
-								<input type="radio" name="optradio11" required>Good
+								<input type="radio" name="choice1" value = "3" required>Good
 							</label>
 							<label class="radio-inline">
-								<input type="radio" name="optradio11" required>Very Good
+								<input type="radio" name="choice1" value = "4" required>Very Good
 							</label>
 							<label class="radio-inline">
-								<input type="radio" name="optradio11" required>Excellent
+								<input type="radio" name="choice1" value = "5" required>Excellent
 							</label>
 						</div>
 						<div class="form-group rad-text">
 						<p class="ques-form">2. How far is the course rich with it's relevant concepts?</p>
 							<label class="radio-inline">
-								<input type="radio" name="optradio12" required>Very Poor
+								<input type="radio" name="choice2" value = "0" required>Very Poor
 							</label>
 							<label class="radio-inline">
-								<input type="radio" name="optradio12" required>Poor
+								<input type="radio" name="choice2" value = "1" required>Poor
 							</label>
 							<label class="radio-inline">
-								<input type="radio" name="optradio12" required>Fair
+								<input type="radio" name="choice2" value = "2" required>Fair
 							</label>
 							<label class="radio-inline">
-								<input type="radio" name="optradio12" required>Good
+								<input type="radio" name="choice2" value = "3" required>Good
 							</label>
 							<label class="radio-inline">
-								<input type="radio" name="optradio12" required>Very Good
+								<input type="radio" name="choice2" value = "4" required>Very Good
 							</label>
 							<label class="radio-inline">
-								<input type="radio" name="optradio12" required>Excellent
+								<input type="radio" name="choice2" value = "5" required>Excellent
 							</label>
 						</div>
 						<div class="form-group rad-text">
 						<p class="ques-form">3. How far are the credit hours of the course relevant to it's content?</p>
 							<label class="radio-inline">
-								<input type="radio" name="optradio13" required>Very Poor
+								<input type="radio" name="choice3" value = "0" required>Very Poor
 							</label>
 							<label class="radio-inline">
-								<input type="radio" name="optradio13" required>Poor
+								<input type="radio" name="choice3" value = "1" required>Poor
 							</label>
 							<label class="radio-inline">
-								<input type="radio" name="optradio13" required>Fair
+								<input type="radio" name="choice3" value = "2" required>Fair
 							</label>
 							<label class="radio-inline">
-								<input type="radio" name="optradio13" required>Good
+								<input type="radio" name="choice3" value = "3" required>Good
 							</label>
 							<label class="radio-inline">
-								<input type="radio" name="optradio13" required>Very Good
+								<input type="radio" name="choice3" value = "4" required>Very Good
 							</label>
 							<label class="radio-inline">
-								<input type="radio" name="optradio13" required>Excellent
+								<input type="radio" name="choice3" value = "5" required>Excellent
 							</label>
 						</div>
 						<div class="form-group rad-text">
 						<p class="ques-form">4. How far is the course relevant to your future career?</p>
 							<label class="radio-inline">
-								<input type="radio" name="optradio14" required>Very Poor
+								<input type="radio" name="choice4" value = "0" required>Very Poor
 							</label>
 							<label class="radio-inline">
-								<input type="radio" name="optradio14" required>Poor
+								<input type="radio" name="choice4" value = "1" required>Poor
 							</label>
 							<label class="radio-inline">
-								<input type="radio" name="optradio14" required>Fair
+								<input type="radio" name="choice4" value = "2" required>Fair
 							</label>
 							<label class="radio-inline">
-								<input type="radio" name="optradio14" required>Good
+								<input type="radio" name="choice4" value = "3" required>Good
 							</label>
 							<label class="radio-inline">
-								<input type="radio" name="optradio14" required>Very Good
+								<input type="radio" name="choice4" value = "4" required>Very Good
 							</label>
 							<label class="radio-inline">
-								<input type="radio" name="optradio14" required>Excellent
+								<input type="radio" name="choice4" value = "5" required>Excellent
 							</label>
 						</div>
 						<div class="form-group rad-text">
 						<p class="ques-form">5. How far are the course's material satisfactory to one's understanding of it's concepts?</p>
 							<label class="radio-inline">
-								<input type="radio" name="optradio15" required>Very Poor
+								<input type="radio" name="choice5" value = "0" required>Very Poor
 							</label>
 							<label class="radio-inline">
-								<input type="radio" name="optradio15" required>Poor
+								<input type="radio" name="choice5" value = "1" required>Poor
 							</label>
 							<label class="radio-inline">
-								<input type="radio" name="optradio15" required>Fair
+								<input type="radio" name="choice5" value = "2" required>Fair
 							</label>
 							<label class="radio-inline">
-								<input type="radio" name="optradio15" required>Good
+								<input type="radio" name="choice5" value = "3" required>Good
 							</label>
 							<label class="radio-inline">
-								<input type="radio" name="optradio15" required>Very Good
+								<input type="radio" name="choice5" value = "4" required>Very Good
 							</label>
 							<label class="radio-inline">
-								<input type="radio" name="optradio15" required>Excellent
+								<input type="radio" name="choice5" value = "5" required>Excellent
 							</label>
 						</div>
 						<div class="form-group col-sm-8 col-sm-offset-2">
 						  <label class="rad-text" for="comment">Comments:</label>
-						  <textarea class="form-control field" rows="10" cols="10" placeholder="Write your comments here..." id="comment3"></textarea>
-						</div>
-						<div class="form-group col-sm-8 col-sm-offset-2">
-							<button type="submit" class="btn btn-lg">Submit</button>
+						  <textarea class="form-control field" rows="10" cols="10" placeholder="Write your comments here..." name="comment1"></textarea>
 						</div>
 					</div>
+					<% count.times do |i|%>
+						<div id=<%="part"+"#{i+2}"%> class="tab-pane fade">
+						<h3 class="rad-text"><%=staff_names.shift%></h3>
+						<div class="form-group rad-text">
+						<p class="ques-form">1. How far is the lecturer committed to the course?</p>
+							<label class="radio-inline">
+								<input type="radio" name=<%="choice" + "#{5*(i+1) + 1}"%> value = "0" required>Very Poor
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name=<%="choice" + "#{5*(i+1) + 1}"%> value = "1" required>Poor
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name=<%="choice" + "#{5*(i+1) + 1}"%> value = "2" required>Fair
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name=<%="choice" + "#{5*(i+1) + 1}"%> value = "3" required>Good
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name=<%="choice" + "#{5*(i+1) + 1}"%> value = "4" required>Very Good
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name=<%="choice" + "#{5*(i+1) + 1}"%> value = "5" required>Excellent
+							</label>
+						</div>
+						<div class="form-group rad-text">
+						<p class="ques-form">2. How far is the lecturer way of delivery satisfy you?</p>
+							<label class="radio-inline">
+								<input type="radio" name=<%="choice" + "#{5*(i+1) + 2}"%> value = "0" required>Very Poor
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name=<%="choice" + "#{5*(i+1) + 2}"%> value = "1" required>Poor
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name=<%="choice" + "#{5*(i+1) + 2}"%> value = "2" required>Fair
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name=<%="choice" + "#{5*(i+1) + 2}"%> value = "3" required>Good
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name=<%="choice" + "#{5*(i+1) + 2}"%> value = "4" required>Very Good
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name=<%="choice" + "#{5*(i+1) + 2}"%> value = "5" required>Excellent
+							</label>
+						</div>
+						<div class="form-group rad-text">
+						<p class="ques-form">3. How far does the lecturer exam's satisfy an engineering mindset?</p>
+							<label class="radio-inline">
+								<input type="radio" name=<%="choice" + "#{5*(i+1) + 3}"%> value = "0" required>Very Poor
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name=<%="choice" + "#{5*(i+1) + 3}"%> value = "1" required>Poor
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name=<%="choice" + "#{5*(i+1) + 3}"%> value = "2" required>Fair
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name=<%="choice" + "#{5*(i+1) + 3}"%> value = "3" required>Good
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name=<%="choice" + "#{5*(i+1) + 3}"%> value = "4" required>Very Good
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name=<%="choice" + "#{5*(i+1) + 3}"%> value = "5" required>Excellent
+							</label>
+						</div>
+						<div class="form-group rad-text">
+						<p class="ques-form">4. How far does the lecturer motivate you to learn?</p>
+							<label class="radio-inline">
+								<input type="radio" name=<%="choice" + "#{5*(i+1) + 4}"%> value = "0" required>Very Poor
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name=<%="choice" + "#{5*(i+1) + 4}"%> value = "1" required>Poor
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name=<%="choice" + "#{5*(i+1) + 4}"%> value = "2" required>Fair
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name=<%="choice" + "#{5*(i+1) + 4}"%> value = "3" required>Good
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name=<%="choice" + "#{5*(i+1) + 4}"%> value = "4"  required>Very Good
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name=<%="choice" + "#{5*(i+1) + 4}"%> value = "5" required>Excellent
+							</label>
+						</div>
+						<div class="form-group rad-text">
+						<p class="ques-form">5. How far is the lecturer understanding to the course's concepts?</p>
+							<label class="radio-inline">
+								<input type="radio" name=<%="choice" + "#{5*(i+1) + 5}"%> value = "0" required>Very Poor
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name=<%="choice" + "#{5*(i+1) + 5}"%> value = "1" required>Poor
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name=<%="choice" + "#{5*(i+1) + 5}"%> value = "2" required>Fair
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name=<%="choice" + "#{5*(i+1) + 5}"%> value = "3" required>Good
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name=<%="choice" + "#{5*(i+1) + 5}"%> value = "4" required>Very Good
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name=<%="choice" + "#{5*(i+1) + 5}"%> value = "5" required>Excellent
+							</label>
+
+						</div>
+						<div class="form-group col-sm-8 col-sm-offset-2">
+						  <label class="rad-text" for="comment">Comments:</label>
+						  <textarea class="form-control field" rows="10" cols="10" placeholder="Write your comments here..." name=<%="comment"+"#{i+2}"%>>
+						  </textarea>
+						  <input hidden name="staff_ids" value=<%=staff_ids%>>
+						  <input hidden name="count" value=<%=count%>>
+						  <input hidden name="id" value=<%=session[:id]%>>
+						  <input hidden name="course_id" value=<%=course_id%>>
+						</div>
+						<%if i == count -1%>
+							<div class="form-group col-sm-8 col-sm-offset-2">
+								<button type="submit" class="btn btn-lg">Submit</button>
+							</div>
+						<%end%>
+					</div>
+					<%end%>
+					
+					
 				</div>
 			</form>
 		</div>

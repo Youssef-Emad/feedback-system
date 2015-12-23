@@ -15,7 +15,7 @@
 						<tbody>
 							<% if list != nil%>
 								<%list.each do |i|%>
-								<tr class="clickable-row" style="cursor: pointer" data-href="http://www.filgoal.com">
+								<tr class="clickable-row" style="cursor: pointer" data-href=<%= "#{session[:id]}/feedback/#{list[0]}"%>>
 									<th class="table-header"><%=list.shift%></th>
 									<th class="table-header"><%=list.shift%></th>
 									<th class="table-header"><%=list.shift%></th>

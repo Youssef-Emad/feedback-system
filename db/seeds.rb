@@ -49,6 +49,3 @@ connection.execute"INSERT INTO CCS(staff_id,class_id,course_code)
 VALUES (21,41,31),
 (22,41,31)
 ,(24,41,31);"
-
-connection.execute"INSERT INTO EVALUATE 
-VALUES (12,22,31,5,4,5,3,2,'BATTEEE5a');"
