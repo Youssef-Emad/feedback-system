@@ -4,5 +4,7 @@ Rails.application.routes.draw do
   get "/staff/:id",to: "staff#home"
   get "/students/:id",to: "students#home"
   get "/logout" , to: "persons#logout"
-  get "/feedback/:id" , to: "students#feedback"
+  get "students/:id/feedback/:course_id" , to: "students#feedback"
+  get "staff/:id/feedback/:course_id" , to: "staff#feedback"
+  post "/feedbackinsert", to: "students#feedback_insert"
 end
