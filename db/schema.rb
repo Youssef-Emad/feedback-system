@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151223092705) do
+ActiveRecord::Schema.define(version: 20151223204252) do
 
   create_table "CCS", id: false, force: :cascade do |t|
     t.integer "staff_id",    limit: 4, null: false
@@ -45,7 +45,19 @@ ActiveRecord::Schema.define(version: 20151223092705) do
 
   add_index "DEPARTMENT", ["lord_id"], name: "lord_id", unique: true, using: :btree
 
-  create_table "EVALUATE", id: false, force: :cascade do |t|
+  create_table "EVALUATECOURSE", primary_key: "student_id", force: :cascade do |t|
+    t.integer "course_code",    limit: 4,    null: false
+    t.integer "a1",             limit: 4,    null: false
+    t.integer "a2",             limit: 4,    null: false
+    t.integer "a3",             limit: 4,    null: false
+    t.integer "a4",             limit: 4,    null: false
+    t.integer "a5",             limit: 4,    null: false
+    t.string  "other_comments", limit: 1000
+  end
+
+  add_index "EVALUATECOURSE", ["course_code"], name: "EV_SUBJ_subject_id", using: :btree
+
+  create_table "EVALUATESTAFF", id: false, force: :cascade do |t|
     t.integer "student_id",     limit: 4,    null: false
     t.integer "staff_id",       limit: 4,    null: false
     t.integer "course_code",    limit: 4,    null: false
@@ -57,8 +69,8 @@ ActiveRecord::Schema.define(version: 20151223092705) do
     t.string  "other_comments", limit: 1000
   end
 
-  add_index "EVALUATE", ["course_code"], name: "EVALUATE_3", using: :btree
-  add_index "EVALUATE", ["staff_id"], name: "EVALUATE_2", using: :btree
+  add_index "EVALUATESTAFF", ["course_code"], name: "EVALUATE_3", using: :btree
+  add_index "EVALUATESTAFF", ["staff_id"], name: "EVALUATE_2", using: :btree
 
   create_table "PERSON", primary_key: "person_id", force: :cascade do |t|
     t.string  "sex",       limit: 7
@@ -100,9 +112,11 @@ ActiveRecord::Schema.define(version: 20151223092705) do
   add_foreign_key "CLASS", "DEPARTMENT", column: "department_id", primary_key: "department_id", name: "class_dept_id", on_update: :cascade, on_delete: :cascade
   add_foreign_key "COURSE", "DEPARTMENT", column: "department_id", primary_key: "department_id", name: "course_dept_id", on_update: :cascade, on_delete: :cascade
   add_foreign_key "DEPARTMENT", "PROFESSOR", column: "lord_id", primary_key: "prof_id", name: "department_lord_id", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "EVALUATE", "COURSE", column: "course_code", primary_key: "course_code", name: "EVALUATE_3", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "EVALUATE", "PERSON", column: "staff_id", primary_key: "person_id", name: "EVALUATE_2", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "EVALUATE", "PERSON", column: "student_id", primary_key: "person_id", name: "EVALUATE_1", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "EVALUATECOURSE", "COURSE", column: "course_code", primary_key: "course_code", name: "EV_SUBJ_subject_id", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "EVALUATECOURSE", "STUDENT", column: "student_id", primary_key: "student_id", name: "EV_SUBJ_student_id", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "EVALUATESTAFF", "COURSE", column: "course_code", primary_key: "course_code", name: "EVALUATE_3", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "EVALUATESTAFF", "PERSON", column: "staff_id", primary_key: "person_id", name: "EVALUATE_2", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "EVALUATESTAFF", "PERSON", column: "student_id", primary_key: "person_id", name: "EVALUATE_1", on_update: :cascade, on_delete: :cascade
   add_foreign_key "PROFESSOR", "STAFF", column: "prof_id", primary_key: "staff_id", name: "prof_id", on_update: :cascade, on_delete: :cascade
   add_foreign_key "STAFF", "DEPARTMENT", column: "department_id", primary_key: "department_id", name: "staff_dept_id", on_update: :cascade, on_delete: :cascade
   add_foreign_key "STAFF", "PERSON", column: "staff_id", primary_key: "person_id", name: "staff_person_id", on_update: :cascade, on_delete: :cascade
