@@ -5,10 +5,6 @@
 	end
 
 	def login 
-		puts "*************************"
-		puts "*************************"
-		puts "email: #{params[:email]}"
-		puts "password: #{params[:password]}"
 		email = params["email"]
 		password =  params["password"]
 		check_existance(email,password)
@@ -29,32 +25,20 @@ def check_existance(email,password)
 		session[:id] = @person_data.first[0]
 		adminstrator_check = ActiveRecord::Base.connection.execute"SELECT lord_id FROM DEPARTMENT  WHERE lord_id = #{@person_data.first[0]};"
 		if adminstrator_check.first != nil
-			session[:type] = "lord"
-			session[:is_staff] = 1
-			respond_to do |format|
-				format.html {}
-				format.js {}
-			end
-			# redirect_to "/staff/#{@person_data.first[0]}"
+			respond("lord")
 		else
 			professor_check = ActiveRecord::Base.connection.execute"SELECT prof_id FROM PROFESSOR  WHERE prof_id = #{@person_data.first[0]};"
 			if professor_check.first != nil
-				session[:type] = "professor"
-				session[:is_staff] = 1
-				redirect_to "/staff/#{@person_data.first[0]}"
+				respond("professor")
 			else
 				
 				ta_check = ActiveRecord::Base.connection.execute"SELECT TA_id FROM  TA WHERE TA_id = #{@person_data.first[0]}"
 				if ta_check.first != nil
-					session[:type] = "ta"
-					session[:is_staff] = 1
-					redirect_to "/staff/#{@person_data.first[0]}"
+					respond("ta")
 				else
 					student_check = ActiveRecord::Base.connection.execute"SELECT student_id FROM STUDENT  WHERE student_id = #{@person_data.first[0]}"
 					if student_check.first != nil
-						session[:type] = "student"
-						session[:is_staff] = 0
-						redirect_to "/students/#{@person_data.first[0]}"
+						respond("student")
 					end
 				end
 			end
@@ -71,5 +55,18 @@ def check_logged_in
 		else session[:is_staff] == 0
 			redirect_to "/students/#{session[:id]}"
 		end
+	end
+end
+
+def respond(input_type)
+	session[:type] = input_type
+	if input_type == "student"
+		session[:is_staff] = 0
+	else
+		session[:is_staff] = 1
+	end
+	respond_to do |format|
+		format.html {}
+		format.js {}
 	end
 end

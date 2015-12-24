@@ -17,7 +17,10 @@
 
  	def feedback
  		if check_student_evaluation(params["course_id"])
- 			redirect_to "/home"
+ 			respond_to do |format|
+				format.html {}
+				format.js {}
+			end
  			return
  		end
  		result = ActiveRecord::Base.connection.execute"
@@ -63,7 +66,6 @@ end
 
 def check_student_evaluation(course_id)
 	result = ActiveRecord::Base.connection.execute"select student_id from EVALUATECOURSE where student_id = #{session[:id]}"
-	
 	if result.first != nil
 		return true
 	end

@@ -1,0 +1,5 @@
+<% if @failed %>
+	sweetAlert("Invalid Email or Password", " ", "error");
+<%else%>
+	window.location = '/home';
+<%end%>
