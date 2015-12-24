@@ -1,5 +1,5 @@
  class StaffController < ApplicationController
- 	before_filter :check_staff_authorization
+ 	#before_filter :check_staff_authorization
  	def home
  		result = ActiveRecord::Base.connection.execute"
  		SELECT course_name ,course_code,C.department_id,D.department_name
