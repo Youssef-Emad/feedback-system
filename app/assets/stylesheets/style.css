@@ -82,7 +82,7 @@ img { max-width: 100%; }
 /***** Top content *****/
 
 .inner-bg {
-    padding: 100px 0 60px 0;
+    padding: 100px 0 40px 0;
 }
 
 .top-content .text {
@@ -250,6 +250,12 @@ color: #000 ;
 	color:darkorange ;
 }
 
+.chart{
+	width:  80%;
+	height: 80vh;
+	margin: 0 auto;
+}
+
 /***** Media queries *****/
 
 @media (min-width: 992px) and (max-width: 1199px) {}
@@ -258,7 +264,7 @@ color: #000 ;
 
 @media (max-width: 767px) {
 	
-	.inner-bg { padding: 60px 0 110px 0; }
+	.inner-bg { padding: 60px 0 40px 0; }
 
 }
 
