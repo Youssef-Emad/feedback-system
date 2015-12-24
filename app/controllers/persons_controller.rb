@@ -4,7 +4,11 @@
 	def home
 	end
 
-	def login
+	def login 
+		puts "*************************"
+		puts "*************************"
+		puts "email: #{params[:email]}"
+		puts "password: #{params[:password]}"
 		email = params["email"]
 		password =  params["password"]
 		check_existance(email,password)
@@ -19,40 +23,44 @@
 end
 
 def check_existance(email,password)
-	person_data = ActiveRecord::Base.connection.execute"SELECT person_id ,password FROM PERSON WHERE email='#{email}'"
+	@person_data = ActiveRecord::Base.connection.execute"SELECT person_id ,password FROM PERSON WHERE email='#{email}'"
 
-	if person_data.first != nil && person_data.first[1] == password
-		session[:id] = person_data.first[0]
-		adminstrator_check = ActiveRecord::Base.connection.execute"SELECT lord_id FROM DEPARTMENT  WHERE lord_id = #{person_data.first[0]};"
+	if @person_data.first != nil && @person_data.first[1] == password
+		session[:id] = @person_data.first[0]
+		adminstrator_check = ActiveRecord::Base.connection.execute"SELECT lord_id FROM DEPARTMENT  WHERE lord_id = #{@person_data.first[0]};"
 		if adminstrator_check.first != nil
 			session[:type] = "lord"
 			session[:is_staff] = 1
-			redirect_to "/staff/#{person_data.first[0]}"
+			respond_to do |format|
+				format.html {}
+				format.js {}
+			end
+			# redirect_to "/staff/#{@person_data.first[0]}"
 		else
-			professor_check = ActiveRecord::Base.connection.execute"SELECT prof_id FROM PROFESSOR  WHERE prof_id = #{person_data.first[0]};"
+			professor_check = ActiveRecord::Base.connection.execute"SELECT prof_id FROM PROFESSOR  WHERE prof_id = #{@person_data.first[0]};"
 			if professor_check.first != nil
 				session[:type] = "professor"
 				session[:is_staff] = 1
-				redirect_to "/staff/#{person_data.first[0]}"
+				redirect_to "/staff/#{@person_data.first[0]}"
 			else
 				
-				ta_check = ActiveRecord::Base.connection.execute"SELECT TA_id FROM  TA WHERE TA_id = #{person_data.first[0]}"
+				ta_check = ActiveRecord::Base.connection.execute"SELECT TA_id FROM  TA WHERE TA_id = #{@person_data.first[0]}"
 				if ta_check.first != nil
 					session[:type] = "ta"
 					session[:is_staff] = 1
-					redirect_to "/staff/#{person_data.first[0]}"
+					redirect_to "/staff/#{@person_data.first[0]}"
 				else
-					student_check = ActiveRecord::Base.connection.execute"SELECT student_id FROM STUDENT  WHERE student_id = #{person_data.first[0]}"
+					student_check = ActiveRecord::Base.connection.execute"SELECT student_id FROM STUDENT  WHERE student_id = #{@person_data.first[0]}"
 					if student_check.first != nil
 						session[:type] = "student"
 						session[:is_staff] = 0
-						redirect_to "/students/#{person_data.first[0]}"
+						redirect_to "/students/#{@person_data.first[0]}"
 					end
 				end
 			end
 		end
 	else
-		render 'home'
+		@failed = true
 	end
 end
 
