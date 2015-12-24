@@ -2,7 +2,7 @@
 			<div class="inner-bg">
 				<div class="container">
 					<div class="row">
-						<div class="col-sm-8 col-sm-offset-2 text">
+						<div class="col-sm-8 col-sm-offset-2 text" id ="datalength" data-len = <%="#{count}"%>>
 							<h1>Statistics</h1>
 						</div>
 					</div>
@@ -11,10 +11,12 @@
 		</div>
 
 
-		<div id="bar_chart1"  class="chart"></div>
+		<div id="course_chart"  class="chart" data-course=<%=course_feedback%>></div>
 		<br><br><br>
-		<div id="bar_chart2"  class="chart"></div>
+		<div id="doc_chart"  class="chart" data-doc=<%=doc_feedback%>></div>
 		<br><br><br>
-		<h3 class="rad-text">Eng.esm el mo3ed</h3>
-		<div id="bar_chart3"  class="chart"></div>
+		<% count.times do |i|%>
+			<h3 class="rad-text"><%= "Eng." + ta_names.shift%></h3>
+			<div id=<%="ta_chart"+"#{i+3}"%>  class="chart" data-ta =<%= ta_feedback%>></div>
+		<%end%>
 		<br><br><br>

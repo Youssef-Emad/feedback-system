@@ -1,33 +1,15 @@
 //google.load("visualization", "1.1", {packages:["bar"]});
 google.charts.load("43", {packages:["bar"]});
 google.charts.setOnLoadCallback(drawChart);
+var length= $("#datalength").data("len");
+var course_string = $("#course_chart").data("course");
+var course_feedback = course_string.split(",")
+var doc_string = $("#doc_chart").data("doc");
+var doc_feedback = doc_string.split(",")
+var ta_data = []
+var ta_charts = []
+
 function drawChart() {
-	var data1 = new google.visualization.arrayToDataTable([
-			['Question Value', 'Very poor', 'Poor', 'Fair', 'Good', 'Very good', 'Excellent'],
-			['Major relevance', 25, 20, 10, 22, 15, 8],
-			['Course richness', 40, 10, 5, 7, 13, 25],
-			['Sufficient time', 5, 7, 3, 15, 20, 50],
-			['Career relevance', 10, 10, 20, 10, 30, 20],
-			['Sufficient material', 20, 2, 3, 28, 35, 12]
-			]);
-
-	var data2 = new google.visualization.arrayToDataTable([
-			['Question Value', 'Very poor', 'Poor', 'Fair', 'Good', 'Very good', 'Excellent'],
-			['Commitment', 25, 10, 20, 22, 15, 8],
-			['Delivery', 40, 10, 5, 7, 23, 15],
-			['Exams', 5, 7, 3, 15, 30, 40],
-			['Motivation', 10, 10, 20, 25, 15, 20],
-			['Organization', 10, 2, 3, 28, 45, 12]
-			]);
-
-	var data3 = new google.visualization.arrayToDataTable([
-			['Question Value', 'Very poor', 'Poor', 'Fair', 'Good', 'Very good', 'Excellent'],
-			['Commitment', 25, 10, 20, 22, 15, 8],
-			['Delivery', 40, 10, 5, 7, 23, 15],
-			['Support', 5, 7, 3, 15, 30, 40],
-			['Communication', 10, 10, 20, 25, 15, 20],
-			['Organization', 10, 2, 3, 28, 45, 12]
-			]);
 
 	var options1 = {
 		chart: { title: 'Course Evaluation',
@@ -71,19 +53,57 @@ function drawChart() {
 		backgroundColor: 'transparent'
 	};
 
-	var chart1 = new google.charts.Bar(document.getElementById('bar_chart1'));
+	var data1 = new google.visualization.arrayToDataTable([
+			['Question Value', 'Very poor', 'Poor', 'Fair', 'Good', 'Very good', 'Excellent'],
+			['Major relevance', course_feedback[0], course_feedback[1], course_feedback[2], course_feedback[3], course_feedback[4], course_feedback[5]],
+			['Course richness', course_feedback[6], course_feedback[7], course_feedback[8], course_feedback[9], course_feedback[10], course_feedback[11]],
+			['Sufficient time', course_feedback[12], course_feedback[13], course_feedback[14], course_feedback[15], course_feedback[16], course_feedback[17]],
+			['Career relevance', course_feedback[18], course_feedback[19], course_feedback[20], course_feedback[21], course_feedback[22], course_feedback[23]],
+			['Sufficient material', course_feedback[24], course_feedback[25], course_feedback[26], course_feedback[27], course_feedback[28], course_feedback[29]]
+			]);
+
+	var data2 = new google.visualization.arrayToDataTable([
+			['Question Value', 'Very poor', 'Poor', 'Fair', 'Good', 'Very good', 'Excellent'],
+			['Commitment', doc_feedback[0], doc_feedback[1], doc_feedback[2], doc_feedback[3], doc_feedback[4], doc_feedback[5]],
+			['Delivery', doc_feedback[6], doc_feedback[7], doc_feedback[8], doc_feedback[9], doc_feedback[10], doc_feedback[11]],
+			['Exams', doc_feedback[12], doc_feedback[13], doc_feedback[14], doc_feedback[15], doc_feedback[16], doc_feedback[17]],
+			['Motivation', doc_feedback[18], doc_feedback[19], doc_feedback[20], doc_feedback[21], doc_feedback[22], doc_feedback[23]],
+			['Organization', doc_feedback[24], doc_feedback[25], doc_feedback[26], doc_feedback[27], doc_feedback[28], doc_feedback[29]]
+			]);
+	
+	for (var i = 0; i < length; i++) 
+    {
+    	var ta_string = $("#ta_chart"+(i+3)).data("ta");
+		var ta_feedback = ta_string.split(",")
+		ta_data[i] = new google.visualization.arrayToDataTable([
+				['Question Value', 'Very poor', 'Poor', 'Fair', 'Good', 'Very good', 'Excellent'],
+				['Commitment', ta_feedback[30*i + 0], ta_feedback[30*i + 1], ta_feedback[30*i + 2], ta_feedback[30*i + 3], ta_feedback[30*i + 4], ta_feedback[30*i + 5]],
+				['Delivery', ta_feedback[30*i + 6], ta_feedback[30*i + 7], ta_feedback[30*i + 8], ta_feedback[30*i + 9], ta_feedback[30*i + 10], ta_feedback[30*i + 11]],
+				['Support', ta_feedback[30*i + 12], ta_feedback[30*i + 13], ta_feedback[30*i + 14], ta_feedback[30*i + 15], ta_feedback[30*i + 16], ta_feedback[30*i + 17]],
+				['Communication', ta_feedback[30*i + 18], ta_feedback[30*i + 19], ta_feedback[30*i + 20], ta_feedback[30*i + 21], ta_feedback[30*i + 22], ta_feedback[30*i + 23]],
+				['Organization', ta_feedback[30*i + 24], ta_feedback[30*i + 25], ta_feedback[30*i + 26], ta_feedback[30*i + 27], ta_feedback[30*i + 28], ta_feedback[30*i + 29]]
+				]);
+	}
+
+	var chart1 = new google.charts.Bar(document.getElementById('course_chart'));
 	chart1.draw(data1, google.charts.Bar.convertOptions(options1));
 
-	var chart2 = new google.charts.Bar(document.getElementById('bar_chart2'));
+	var chart2 = new google.charts.Bar(document.getElementById('doc_chart'));
 	chart2.draw(data2, google.charts.Bar.convertOptions(options2));
 
-	var chart3 = new google.charts.Bar(document.getElementById('bar_chart3'));
-	chart3.draw(data3, google.charts.Bar.convertOptions(options3));
+	for (var i = 0 ; i< length ;i++)
+	{
+		ta_charts[i] = new google.charts.Bar(document.getElementById('ta_chart'+(i+3)));
+		ta_charts[i].draw(ta_data[i], google.charts.Bar.convertOptions(options3));
+	}
 
 	function resizeHandler () {
 		chart1.draw(data1, google.charts.Bar.convertOptions(options1));
 		chart2.draw(data2, google.charts.Bar.convertOptions(options2));
-		chart2.draw(data3, google.charts.Bar.convertOptions(options3));
+		for (var i = 0 ; i<length ;i++)
+		{
+			ta_charts[i].draw(ta_data[i], google.charts.Bar.convertOptions(options3));
+		}
 	}
 	if (window.addEventListener) {
 		window.addEventListener('resize', resizeHandler, false);

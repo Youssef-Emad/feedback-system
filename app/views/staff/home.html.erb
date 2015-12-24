@@ -15,7 +15,7 @@
 						<tbody>
 							<% if list != nil%>
 								<%list.each do |i|%>
-								<tr class="clickable-row" style="cursor: pointer" data-href=<%= "statistics"%>>
+								<tr class="clickable-row" id = "staff-row"style="cursor: pointer" data-href=<%="#{session[:id]}"+"/statistics/"+"#{list[1]}"%>>
 									<th class="table-header"><%=list.shift%></th>
 									<th class="table-header"><%=list.shift%></th>
 									<th class="table-header"><%=list.shift%></th>
@@ -32,3 +32,9 @@
 		</div>
 	</div>            
 </div>
+
+<script type="text/javascript">
+	$("#staff-row").click(function() {
+window.document.location = $(this).data("href");
+});	
+</script>
