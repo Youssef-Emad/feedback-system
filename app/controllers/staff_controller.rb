@@ -22,7 +22,7 @@
  		course_feedback = []
  		doc_feedback = []
  		ta_feedback = []
-
+ 		count = 0
  		1.upto(5) do |i|
 			6.times do |j|
 				sql_course_result = ActiveRecord::Base.connection.execute"
@@ -47,7 +47,9 @@
 			end
  		end
 
- 		sql_ta_names_result = ActiveRecord::Base.connection.execute"SELECT DISTINCT  staff_id ,name 
+ 		if session[:type] != "ta"
+ 			ta_names_result = []
+ 			sql_ta_names_result = ActiveRecord::Base.connection.execute"SELECT DISTINCT  staff_id ,name 
 							FROM CCS C1, PERSON P
 							WHERE course_code = #{params[:course_id]} AND C1.staff_id IN
 							(SELECT TA_id 
@@ -56,33 +58,30 @@
 							WHERE C2.staff_id = #{session[:id]}  AND C2.course_code = #{params[:course_id]}) 
 							AND P.person_id =C1.staff_id;"
 
- 		ta_names_result = []
 
- 		sql_ta_names_result.each do |row|
- 			ta_names_result << row[0]
- 			ta_names_result << row[1]
- 		end
- 		if ta_names_result.first != nil
-	 		ta_ids, ta_names = ta_names_result.partition{|item| item.kind_of?(Fixnum)}
-	 		count = ta_ids.count
-	 		ta_ids.each do |taid|
-	 			1.upto(5) do |i|
-					6.times do |j|
-						ta_result = ActiveRecord::Base.connection.execute"
-						SELECT count(*)
-						FROM EVALUATESTAFF 
-						WHERE staff_id = #{taid} AND course_code = #{params[:course_id]} AND A#{i} = #{j} ;"
-						ta_result.each do |row|
-							ta_feedback << row[0]
-						end
-					end
- 				end
+	 		sql_ta_names_result.each do |row|
+	 			ta_names_result << row[0]
+	 			ta_names_result << row[1]
 	 		end
-	 	else
-	 		count = 0
-	 	end
+	 		if ta_names_result.first != nil
+		 		ta_ids, ta_names = ta_names_result.partition{|item| item.kind_of?(Fixnum)}
+		 		count = ta_ids.count
+		 		ta_ids.each do |taid|
+		 			1.upto(5) do |i|
+						6.times do |j|
+							ta_result = ActiveRecord::Base.connection.execute"
+							SELECT count(*)
+							FROM EVALUATESTAFF 
+							WHERE staff_id = #{taid} AND course_code = #{params[:course_id]} AND A#{i} = #{j} ;"
+							ta_result.each do |row|
+								ta_feedback << row[0]
+							end
+						end
+	 				end
+		 		end
+		 	end
+ 		end
 
-		puts ta_names_result.first
  		course_string = "#{course_feedback.join(',')}"
  		doc_string = "#{doc_feedback.join(',')}"
  		ta_string = "#{ta_feedback.join(',')}"
