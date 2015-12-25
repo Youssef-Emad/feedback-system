@@ -10,7 +10,7 @@ class CreateEvaluateCourse < ActiveRecord::Migration
   a4 INT NOT NULL,
   a5 INT NOT NULL,
   other_comments VARCHAR(1000),
-  PRIMARY KEY (student_id),
+  PRIMARY KEY (student_id,course_code),
   
   CONSTRAINT EV_SUBJ_student_id 
   FOREIGN KEY(student_id) REFERENCES STUDENT(student_id)

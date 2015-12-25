@@ -23,20 +23,20 @@ ActiveRecord::Schema.define(version: 20151223204252) do
   add_index "CCS", ["course_code"], name: "course_code", using: :btree
 
   create_table "CLASS", primary_key: "class_id", force: :cascade do |t|
-    t.string  "year",          limit: 5,  null: false
+    t.string  "semister",      limit: 5,  null: false
     t.string  "type",          limit: 15, null: false
     t.integer "department_id", limit: 4,  null: false
   end
 
-  add_index "CLASS", ["department_id"], name: "department_id", unique: true, using: :btree
+  add_index "CLASS", ["department_id"], name: "class_dept_id", using: :btree
 
   create_table "COURSE", primary_key: "course_code", force: :cascade do |t|
-    t.string  "course_name",   limit: 20, null: false
+    t.string  "course_name",   limit: 45, null: false
     t.integer "department_id", limit: 4,  null: false
   end
 
   add_index "COURSE", ["course_name"], name: "course_name", unique: true, using: :btree
-  add_index "COURSE", ["department_id"], name: "department_id", unique: true, using: :btree
+  add_index "COURSE", ["department_id"], name: "course_dept_id", using: :btree
 
   create_table "DEPARTMENT", primary_key: "department_id", force: :cascade do |t|
     t.string  "department_name", limit: 45, null: false
@@ -45,7 +45,8 @@ ActiveRecord::Schema.define(version: 20151223204252) do
 
   add_index "DEPARTMENT", ["lord_id"], name: "lord_id", unique: true, using: :btree
 
-  create_table "EVALUATECOURSE", primary_key: "student_id", force: :cascade do |t|
+  create_table "EVALUATECOURSE", id: false, force: :cascade do |t|
+    t.integer "student_id",     limit: 4,    null: false
     t.integer "course_code",    limit: 4,    null: false
     t.integer "a1",             limit: 4,    null: false
     t.integer "a2",             limit: 4,    null: false
@@ -76,7 +77,7 @@ ActiveRecord::Schema.define(version: 20151223204252) do
     t.string  "sex",       limit: 7
     t.integer "ssn",       limit: 4,  null: false
     t.string  "name",      limit: 45, null: false
-    t.string  "birthdate", limit: 15
+    t.string  "birthdate", limit: 15, null: false
     t.string  "email",     limit: 45, null: false
     t.string  "password",  limit: 45, null: false
     t.integer "token",     limit: 4
@@ -111,16 +112,16 @@ ActiveRecord::Schema.define(version: 20151223204252) do
   add_foreign_key "CCS", "PERSON", column: "staff_id", primary_key: "person_id", name: "staff_id_2", on_update: :cascade, on_delete: :cascade
   add_foreign_key "CLASS", "DEPARTMENT", column: "department_id", primary_key: "department_id", name: "class_dept_id", on_update: :cascade, on_delete: :cascade
   add_foreign_key "COURSE", "DEPARTMENT", column: "department_id", primary_key: "department_id", name: "course_dept_id", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "DEPARTMENT", "PROFESSOR", column: "lord_id", primary_key: "prof_id", name: "department_lord_id", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "DEPARTMENT", "PROFESSOR", column: "lord_id", primary_key: "prof_id", name: "department_lord_id", on_update: :cascade, on_delete: :nullify
   add_foreign_key "EVALUATECOURSE", "COURSE", column: "course_code", primary_key: "course_code", name: "EV_SUBJ_subject_id", on_update: :cascade, on_delete: :cascade
   add_foreign_key "EVALUATECOURSE", "STUDENT", column: "student_id", primary_key: "student_id", name: "EV_SUBJ_student_id", on_update: :cascade, on_delete: :cascade
   add_foreign_key "EVALUATESTAFF", "COURSE", column: "course_code", primary_key: "course_code", name: "EVALUATE_3", on_update: :cascade, on_delete: :cascade
   add_foreign_key "EVALUATESTAFF", "PERSON", column: "staff_id", primary_key: "person_id", name: "EVALUATE_2", on_update: :cascade, on_delete: :cascade
   add_foreign_key "EVALUATESTAFF", "PERSON", column: "student_id", primary_key: "person_id", name: "EVALUATE_1", on_update: :cascade, on_delete: :cascade
   add_foreign_key "PROFESSOR", "STAFF", column: "prof_id", primary_key: "staff_id", name: "prof_id", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "STAFF", "DEPARTMENT", column: "department_id", primary_key: "department_id", name: "staff_dept_id", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "STAFF", "DEPARTMENT", column: "department_id", primary_key: "department_id", name: "staff_dept_id", on_update: :cascade
   add_foreign_key "STAFF", "PERSON", column: "staff_id", primary_key: "person_id", name: "staff_person_id", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "STUDENT", "CLASS", column: "class_id", primary_key: "class_id", name: "class_id_4", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "STUDENT", "CLASS", column: "class_id", primary_key: "class_id", name: "class_id_4", on_update: :cascade
   add_foreign_key "STUDENT", "PERSON", column: "student_id", primary_key: "person_id", name: "student_id_4", on_update: :cascade, on_delete: :cascade
   add_foreign_key "TA", "STAFF", column: "TA_id", primary_key: "staff_id", name: "staff_id", on_update: :cascade, on_delete: :cascade
 end
