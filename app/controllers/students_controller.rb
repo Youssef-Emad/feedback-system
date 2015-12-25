@@ -55,10 +55,13 @@
  			result << row[0]
  			result << row [1]
  		end
+ 		course_name = ActiveRecord::Base.connection.execute"SELECT course_name FROM COURSE where course_code = #{params["course_id"]}"
 
  		staff_ids, staff_names = result.partition{|item| item.kind_of?(Fixnum)}
+ 		staff_ids_string = "#{staff_ids.join(',')}"
  		courses_count = result.count/2
- 		render "feedback" ,locals: {count: courses_count,staff_names: staff_names,staff_ids: staff_ids,course_id: params["course_id"]}
+
+ 		render "feedback" ,locals: {count: courses_count,staff_names: staff_names,staff_ids: staff_ids_string,course_id: params["course_id"],course_name:course_name.first[0]}
  	end
 
  	def feedback_insert
@@ -67,7 +70,8 @@
  		#{params["choice3"].to_i},#{params["choice4"].to_i},#{params["choice5"].to_i},'#{params["comment1"]}');"
 
  		staff_count = params["count"].to_i
- 		staff_list = JSON.parse params["staff_ids"]
+ 		
+ 		staff_list = params["staff_ids"].split(",")
  		staff_count.times do |i|
  			ActiveRecord::Base.connection.execute"INSERT INTO EVALUATESTAFF VALUES 
  			(#{params["id"].to_i},#{staff_list.shift},#{params["course_id"].to_i},

@@ -48,20 +48,13 @@
  		end
 
  		sql_ta_names_result = ActiveRecord::Base.connection.execute"SELECT DISTINCT  staff_id ,name 
-						FROM EVALUATESTAFF , PERSON P
-						WHERE course_code = #{params[:course_id]} AND staff_id IN
-						(SELECT TA_id 
-						FROM TA ) AND EVALUATESTAFF.student_id IN
-						(SELECT student_id 
-						FROM STUDENT 
-						WHERE class_id IN 
-						(SELECT class_id FROM CCS 
-						WHERE CCS.staff_id = staff_id and CCS.class_id IN
-						(SELECT class_id 
-						FROM CCS CCS_TWO 
-						WHERE course_code = #{params[:course_id]} and staff_id = #{session[:id]}) 
-						)
-						) AND P.person_id = staff_id;"
+							FROM CCS C1, PERSON P
+							WHERE course_code = #{params[:course_id]} AND C1.staff_id IN
+							(SELECT TA_id 
+							FROM TA ) AND C1.class_id IN
+							(SELECT class_id FROM CCS C2
+							WHERE C2.staff_id = #{session[:id]}  AND C2.course_code = #{params[:course_id]}) 
+							AND P.person_id =C1.staff_id;"
 
  		ta_names_result = []
 
@@ -69,10 +62,9 @@
  			ta_names_result << row[0]
  			ta_names_result << row[1]
  		end
-
  		if ta_names_result.first != nil
-	 		ta_ids, ta_names = ta_names_result.first.partition{|item| item.kind_of?(Fixnum)}
-	 		count = ta.ids.count
+	 		ta_ids, ta_names = ta_names_result.partition{|item| item.kind_of?(Fixnum)}
+	 		count = ta_ids.count
 	 		1.upto(5) do |i|
 			6.times do |j|
 				ta_result = ActiveRecord::Base.connection.execute"
