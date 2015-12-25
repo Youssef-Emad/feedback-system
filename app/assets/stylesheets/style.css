@@ -256,6 +256,10 @@ color: #000;
 	margin: 0 auto;
 }
 
+.about-text{
+	text-align: left;
+}
+
 /***** Media queries *****/
 
 @media (min-width: 992px) and (max-width: 1199px) {}

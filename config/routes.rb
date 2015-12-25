@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 	root to: "persons#home"
 	get "/home" , to: "persons#home"
+	get "/contact" , to: "home#contact"
+	get "/about" , to: "home#about"
 	post "/login", to: "persons#login"
 	get "/staff/:id",to: "staff#home"
 	get "/students/:id",to: "students#home"
