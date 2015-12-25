@@ -65,17 +65,19 @@
  		if ta_names_result.first != nil
 	 		ta_ids, ta_names = ta_names_result.partition{|item| item.kind_of?(Fixnum)}
 	 		count = ta_ids.count
-	 		1.upto(5) do |i|
-			6.times do |j|
-				ta_result = ActiveRecord::Base.connection.execute"
-				SELECT count(*)
-				FROM EVALUATESTAFF 
-				WHERE staff_id = #{session[:id]} AND course_code = #{params[:course_id]} AND A#{i} = #{j} ;"
-				ta_result.each do |row|
-					ta_feedback << row[0]
-				end
-			end
- 		end
+	 		ta_ids.each do |taid|
+	 			1.upto(5) do |i|
+					6.times do |j|
+						ta_result = ActiveRecord::Base.connection.execute"
+						SELECT count(*)
+						FROM EVALUATESTAFF 
+						WHERE staff_id = #{taid} AND course_code = #{params[:course_id]} AND A#{i} = #{j} ;"
+						ta_result.each do |row|
+							ta_feedback << row[0]
+						end
+					end
+ 				end
+	 		end
 	 	else
 	 		count = 0
 	 	end

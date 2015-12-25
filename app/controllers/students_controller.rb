@@ -70,8 +70,8 @@
  		#{params["choice3"].to_i},#{params["choice4"].to_i},#{params["choice5"].to_i},'#{params["comment1"]}');"
 
  		staff_count = params["count"].to_i
- 		
  		staff_list = params["staff_ids"].split(",")
+
  		staff_count.times do |i|
  			ActiveRecord::Base.connection.execute"INSERT INTO EVALUATESTAFF VALUES 
  			(#{params["id"].to_i},#{staff_list.shift},#{params["course_id"].to_i},
