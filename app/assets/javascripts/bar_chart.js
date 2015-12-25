@@ -5,10 +5,10 @@ var length= $("#datalength").data("len");
 var course_string = $("#course_chart").data("course");
 var course_feedback = course_string.split(",")
 var doc_string = $("#doc_chart").data("doc");
+var type = $("#doc_chart").data("doc-type");
 var doc_feedback = doc_string.split(",")
 var ta_data = []
 var ta_charts = []
-
 function drawChart() {
 
 	var options1 = {
@@ -25,8 +25,15 @@ function drawChart() {
 		backgroundColor: 'transparent'
 	};
 
+	if (type == 'ta')
+	{
+		title = 'TA'
+	}else{
+		title = 'Professor'
+	}
+
 	var options2 = {
-		chart: { title: 'PHD Evaluation',
+		chart: { title: title + ' Evaluation',
 						 subtitle: 'Average score for each question'},
 		fontName: 'Roboto',
 		fontSize: 16,

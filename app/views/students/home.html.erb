@@ -15,11 +15,19 @@
 						<tbody>
 							<% if list != nil%>
 								<%list.each do |i|%>
-								<tr class="clickable-row" id ="students-row"style="cursor: pointer" data-href=<%= "#{session[:id]}/feedback/#{list[1]}"%>>
-									<th class="table-header"><%=list.shift%></th>
-									<th class="table-header"><%=list.shift%></th>
-									<th class="table-header"><%=list.shift%></th>
-								</tr>
+									<%if bool_list.shift == 0%>
+										<tr class="clickable-row" id ="students-row"style="cursor: pointer" data-href=<%= "#{session[:id]}/feedback/#{list[1]}"%>>
+											<th class="table-header"><%=list.shift%></th>
+											<th class="table-header"><%=list.shift%></th>
+											<th class="table-header"><%=list.shift%></th>
+										</tr>
+									<%else%>
+										<tr >
+											<th class="table-header"><%=list.shift%></th>
+											<th class="table-header"><%=list.shift%></th>
+											<th class="table-header"><%=list.shift%><span class="glyphicon glyphicon-ok check-style"  aria-hidden="true"></span></th>
+										</tr>
+									<%end%>
 								<% end%>
 							<%end%>
 						</tbody>

@@ -3,16 +3,30 @@
   	skip_before_filter :verify_authenticity_token
  	def home
  		result = ActiveRecord::Base.connection.execute"
- 		SELECT course_name ,course_code,COURSE.department_id,DEPARTMENT.department_name
-	FROM COURSE , DEPARTMENT
-	WHERE course_code IN(
-	SELECT course_code
-	FROM CCS CCS1
-	WHERE CCS1.class_id IN(
-	SELECT class_id
-	FROM  STUDENT SIC
-	WHERE SIC.student_id = #{params["id"]}))AND DEPARTMENT.department_id = COURSE.department_id ;"
- 		render "home",locals: {list: result.first}
+ 		SELECT course_name ,course_code,DEPARTMENT.department_name
+		FROM COURSE , DEPARTMENT
+		WHERE course_code IN(
+		SELECT course_code
+		FROM CCS CCS1
+		WHERE CCS1.class_id IN(
+		SELECT class_id
+		FROM  STUDENT SIC
+		WHERE SIC.student_id = #{params["id"]}))AND DEPARTMENT.department_id = COURSE.department_id ;"
+
+ 		bool_list = []
+ 		count = result.first.count/3
+ 		count.times do |i|
+ 			bool_result = ActiveRecord::Base.connection.execute"
+	 		SELECT student_id 
+			FROM EVALUATECOURSE 
+			WHERE student_id = #{params["id"]} AND course_code = #{result.first[3*i + 1]} ;"
+			if bool_result.first == nil
+				bool_list << 0
+			else
+				bool_list << 1 
+			end
+ 		end
+ 		render "home",locals: {list: result.first,bool_list:bool_list}
  	end
 
  	def feedback
