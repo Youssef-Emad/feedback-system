@@ -2,7 +2,7 @@
  	before_filter :check_student_authorization
   	skip_before_filter :verify_authenticity_token
  	def home
- 		result = ActiveRecord::Base.connection.execute"
+ 		sql_result = ActiveRecord::Base.connection.execute"
  		SELECT course_name ,course_code,DEPARTMENT.department_name
 		FROM COURSE , DEPARTMENT
 		WHERE course_code IN(
@@ -13,20 +13,27 @@
 		FROM  STUDENT SIC
 		WHERE SIC.student_id = #{params["id"]}))AND DEPARTMENT.department_id = COURSE.department_id ;"
 
+ 		result = []
+ 		sql_result.each do |row|
+ 			result << row[0]
+ 			result << row[1]
+ 			result << row[2]
+ 		end
+
  		bool_list = []
- 		count = result.first.count/3
+ 		count = result.count/3
  		count.times do |i|
  			bool_result = ActiveRecord::Base.connection.execute"
 	 		SELECT student_id 
 			FROM EVALUATECOURSE 
-			WHERE student_id = #{params["id"]} AND course_code = #{result.first[3*i + 1]} ;"
+			WHERE student_id = #{params["id"]} AND course_code = #{result[3*i + 1]} ;"
 			if bool_result.first == nil
 				bool_list << 0
 			else
 				bool_list << 1 
 			end
  		end
- 		render "home",locals: {list: result.first,bool_list:bool_list}
+ 		render "home",locals: {list: result,bool_list:bool_list}
  	end
 
  	def feedback
@@ -34,7 +41,7 @@
  			redirect_to "/home"
  			return
  		end
- 		result = ActiveRecord::Base.connection.execute"
+ 		sql_result = ActiveRecord::Base.connection.execute"
  		SELECT name,person_id 
 		FROM PERSON
 		WHERE person_id IN (
@@ -42,9 +49,19 @@
 		FROM CCS
 		WHERE course_code = #{params["course_id"]}
 		);"
- 		staff_ids, staff_names = result.first.partition{|item| item.kind_of?(Fixnum)}
- 		courses_count = result.first.count/2
- 		render "feedback" ,locals: {count: courses_count,staff_names: staff_names,staff_ids: staff_ids,course_id: params["course_id"]}
+ 		result = []
+ 		
+ 		sql_result.each do |row|
+ 			result << row[0]
+ 			result << row [1]
+ 		end
+ 		course_name = ActiveRecord::Base.connection.execute"SELECT course_name FROM COURSE where course_code = #{params["course_id"]}"
+
+ 		staff_ids, staff_names = result.partition{|item| item.kind_of?(Fixnum)}
+ 		staff_ids_string = "#{staff_ids.join(',')}"
+ 		courses_count = result.count/2
+
+ 		render "feedback" ,locals: {count: courses_count,staff_names: staff_names,staff_ids: staff_ids_string,course_id: params["course_id"],course_name:course_name.first[0]}
  	end
 
  	def feedback_insert
@@ -53,7 +70,8 @@
  		#{params["choice3"].to_i},#{params["choice4"].to_i},#{params["choice5"].to_i},'#{params["comment1"]}');"
 
  		staff_count = params["count"].to_i
- 		staff_list = JSON.parse params["staff_ids"]
+ 		
+ 		staff_list = params["staff_ids"].split(",")
  		staff_count.times do |i|
  			ActiveRecord::Base.connection.execute"INSERT INTO EVALUATESTAFF VALUES 
  			(#{params["id"].to_i},#{staff_list.shift},#{params["course_id"].to_i},
