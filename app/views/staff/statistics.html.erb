@@ -13,7 +13,7 @@
 
 		<div id="course_chart"  class="chart" data-course=<%=course_feedback%>></div>
 		<br><br><br>
-		<div id="doc_chart"  class="chart" data-doc=<%=doc_feedback%>></div>
+		<div id="doc_chart"  class="chart" data-doc=<%=doc_feedback%> data-doc-type=<%= type%>></div>
 		<br><br><br>
 		<% count.times do |i|%>
 			<h3 class="rad-text"><%= "Eng." + ta_names.shift%></h3>
