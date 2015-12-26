@@ -19,10 +19,11 @@
 end
 
 def check_existance(email,password)
-	@person_data = ActiveRecord::Base.connection.execute"SELECT person_id ,password FROM PERSON WHERE email='#{email}'"
+	@person_data = ActiveRecord::Base.connection.execute"SELECT person_id ,password,name FROM PERSON WHERE email='#{email}'"
 
 	if @person_data.first != nil && @person_data.first[1] == password
 		session[:id] = @person_data.first[0]
+		session[:name] = @person_data.first[2]
 		adminstrator_check = ActiveRecord::Base.connection.execute"SELECT lord_id FROM DEPARTMENT  WHERE lord_id = #{@person_data.first[0]};"
 		if adminstrator_check.first != nil
 			respond("lord")
