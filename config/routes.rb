@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 	get "/logout" , to: "persons#logout"
 	get "students/:id/feedback/:course_id" , to: "students#feedback"
 	get "staff/:id/feedback/:course_id" , to: "staff#feedback"
+	get "staff/:id/comments/:course_id" , to: "staff#comments"
 	post "/feedbackinsert", to: "students#feedback_insert"
 	get "staff/:id/statistics/:course_id" , to: "staff#statistics"
 end

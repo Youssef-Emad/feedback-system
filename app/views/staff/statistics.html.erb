@@ -20,3 +20,9 @@
 			<div id=<%="ta_chart"+"#{i+3}"%>  class="chart" data-ta =<%= ta_feedback%>></div>
 		<%end%>
 		<br><br><br>
+		<div class="row">
+			<form method="get" action=<%="/staff/#{session[:id]}/comments/#{params[:course_id]}"%>>
+				<button type="submit" class="btn btn-lg">View Comments</button>
+			</form>
+		</div>
+		<br><br>

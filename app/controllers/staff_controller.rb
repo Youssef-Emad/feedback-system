@@ -87,6 +87,28 @@
  		ta_string = "#{ta_feedback.join(',')}"
  		render "statistics", locals:{count:count , course_feedback:course_string,doc_feedback: doc_string,ta_feedback: ta_string,ta_names: ta_names,type: session[:type]}
  	end
+
+ 	def comments
+ 		@i_comments=[]
+ 		@c_comments=[]
+ 		instructor_comments = ActiveRecord::Base.connection.execute"
+ 		SELECT other_comments
+		FROM EVALUATESTAFF
+		WHERE course_code = #{params[:course_id]}
+		AND staff_id = #{session[:id]}"
+
+		course_comments = ActiveRecord::Base.connection.execute"
+ 		SELECT other_comments
+		FROM EVALUATECOURSE
+		WHERE course_code = #{params[:course_id]}"
+		puts("****************************************000000000000***el result")
+		instructor_comments.each do |row|
+			@i_comments << row[0]
+	 	end
+	 	course_comments.each do |row|
+			@c_comments << row[0]
+	 	end	
+ 	end
 end
 
 def check_staff_authorization

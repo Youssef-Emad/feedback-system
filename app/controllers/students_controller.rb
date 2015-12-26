@@ -80,7 +80,7 @@
  				#{params["choice" + "#{5*(i+1) + 3}"]},
  				#{params["choice" + "#{5*(i+1) + 4}"]},
  				#{params["choice" + "#{5*(i+1) + 5}"]},
- 				'#{params["comment" + "#{i+1}"].to_i}');"
+ 				'#{params["comment" + "#{i+2}"]}');"
  		end
  		redirect_to "/home"
  	end
