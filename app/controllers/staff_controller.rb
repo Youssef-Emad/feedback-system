@@ -101,7 +101,6 @@
  		SELECT other_comments
 		FROM EVALUATECOURSE
 		WHERE course_code = #{params[:course_id]}"
-		puts("****************************************000000000000***el result")
 		instructor_comments.each do |row|
 			@i_comments << row[0]
 	 	end
