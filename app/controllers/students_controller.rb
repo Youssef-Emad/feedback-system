@@ -50,18 +50,26 @@
 		WHERE course_code = #{params["course_id"]}
 		);"
  		result = []
- 		
+ 		types = []
+
  		sql_result.each do |row|
  			result << row[0]
  			result << row [1]
+ 			if row[1].to_s[0] == "2"
+ 				types << "Eng."
+ 			else
+ 				types << "Dr."
+ 			end
  		end
+
  		course_name = ActiveRecord::Base.connection.execute"SELECT course_name FROM COURSE where course_code = #{params["course_id"]}"
 
  		staff_ids, staff_names = result.partition{|item| item.kind_of?(Fixnum)}
  		staff_ids_string = "#{staff_ids.join(',')}"
  		courses_count = result.count/2
 
- 		render "feedback" ,locals: {count: courses_count,staff_names: staff_names,staff_ids: staff_ids_string,course_id: params["course_id"],course_name:course_name.first[0]}
+ 		render "feedback" ,locals: {count: courses_count,staff_names: staff_names,staff_ids: staff_ids_string,course_id: params["course_id"],
+ 			course_name:course_name.first[0],types:types}
  	end
 
  	def feedback_insert
