@@ -86,8 +86,8 @@ function drawChart() {
 				['Question Value', 'Very poor', 'Poor', 'Fair', 'Good', 'Very good', 'Excellent'],
 				['Commitment', ta_feedback[30*i + 0], ta_feedback[30*i + 1], ta_feedback[30*i + 2], ta_feedback[30*i + 3], ta_feedback[30*i + 4], ta_feedback[30*i + 5]],
 				['Delivery', ta_feedback[30*i + 6], ta_feedback[30*i + 7], ta_feedback[30*i + 8], ta_feedback[30*i + 9], ta_feedback[30*i + 10], ta_feedback[30*i + 11]],
-				['Support', ta_feedback[30*i + 12], ta_feedback[30*i + 13], ta_feedback[30*i + 14], ta_feedback[30*i + 15], ta_feedback[30*i + 16], ta_feedback[30*i + 17]],
-				['Communication', ta_feedback[30*i + 18], ta_feedback[30*i + 19], ta_feedback[30*i + 20], ta_feedback[30*i + 21], ta_feedback[30*i + 22], ta_feedback[30*i + 23]],
+				['Exams', ta_feedback[30*i + 12], ta_feedback[30*i + 13], ta_feedback[30*i + 14], ta_feedback[30*i + 15], ta_feedback[30*i + 16], ta_feedback[30*i + 17]],
+				['Motivation', ta_feedback[30*i + 18], ta_feedback[30*i + 19], ta_feedback[30*i + 20], ta_feedback[30*i + 21], ta_feedback[30*i + 22], ta_feedback[30*i + 23]],
 				['Organization', ta_feedback[30*i + 24], ta_feedback[30*i + 25], ta_feedback[30*i + 26], ta_feedback[30*i + 27], ta_feedback[30*i + 28], ta_feedback[30*i + 29]]
 				]);
 	}
